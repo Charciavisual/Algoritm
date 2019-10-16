@@ -22,18 +22,18 @@ public class DFS {
         return true;
     }
 
-    private void recurDfs(int curPos) {
+    private void recursiveDfs(int curPos) {
         System.out.println(curPos);
         visited[curPos] = true;
 
         for (int i = 0; i < adj[curPos].size(); i++) {
             int next = adj[curPos].get(i);
             if (!visited[next])
-                recurDfs(next);
+                recursiveDfs(next);
         }
     }
 
-    private void iterDfs(int curPos) {
+    private void iterativeDfs(int curPos) {
         Stack<Integer> stack = new Stack<>();
         boolean flag = false;
 
@@ -60,11 +60,11 @@ public class DFS {
         }
     }
 
-    public void recurDfs() {
+    public void recursiveDfs() {
         Arrays.fill(visited, false);
         for (int i = 0; i < adj.length; i++) {
             if (!visited[i])
-                recurDfs(i);
+                recursiveDfs(i);
         }
     }
 
@@ -72,7 +72,7 @@ public class DFS {
         Arrays.fill(visited, false);
         for (int i = 0; i < adj.length; i++) {
             if (!visited[i])
-                iterDfs(i);
+                iterativeDfs(i);
         }
     }
 }
