@@ -8,12 +8,16 @@ public class DFS {
     private ArrayList<Integer>[] adj;
     private boolean[] visited;
 
-    public DFS(int n) {
+    public void init(int n, int[][] data) {
         adj = new ArrayList[n];
         visited = new boolean[n];
 
         for (int i = 0; i < n; i++) {
             adj[i] = new ArrayList<>();
+        }
+
+        for (int i = 0; i < data.length; i++) {
+            add(data[i][0], data[i][1]);
         }
     }
 
@@ -22,32 +26,40 @@ public class DFS {
         return true;
     }
 
-    private void recursiveDfs(int curPos) {
-        System.out.println(curPos);
+    private void recursiveSearch(int curPos) {
+        System.out.printf("%s ", curPos);
         visited[curPos] = true;
 
         for (int i = 0; i < adj[curPos].size(); i++) {
             int next = adj[curPos].get(i);
             if (!visited[next])
-                recursiveDfs(next);
+                recursiveSearch(next);
         }
     }
 
-    private void iterativeDfs(int curPos) {
+    public void recursiveSearch() {
+        Arrays.fill(visited, false);
+        for (int i = 0; i < adj.length; i++) {
+            if (!visited[i])
+                recursiveSearch(i);
+        }
+    }
+
+    private void iterativeSearch(int curPos) {
         Stack<Integer> stack = new Stack<>();
         boolean flag = false;
 
-        System.out.println(curPos);
+        System.out.printf("%s ", curPos);
         visited[curPos] = true;
         stack.push(curPos);
 
-        while (!stack.isEmpty()){
+        while (!stack.isEmpty()) {
             curPos = stack.peek();
             flag = false;
             for (int i = 0; i < adj[curPos].size(); i++) {
                 int next = adj[curPos].get(i);
                 if (!visited[next]) {
-                    System.out.println(next);
+                    System.out.printf("%s ", next);
                     visited[next] = true;
                     stack.push(next);
                     flag = true;
@@ -55,24 +67,31 @@ public class DFS {
                 }
             }
 
-            if(!flag)
+            if (!flag)
                 stack.pop();
         }
     }
 
-    public void recursiveDfs() {
+    public void iterativeSearch() {
         Arrays.fill(visited, false);
         for (int i = 0; i < adj.length; i++) {
             if (!visited[i])
-                recursiveDfs(i);
+                iterativeSearch(i);
         }
     }
 
-    public void iterDfs() {
-        Arrays.fill(visited, false);
-        for (int i = 0; i < adj.length; i++) {
-            if (!visited[i])
-                iterativeDfs(i);
-        }
+    public void testDFS(){
+        int n = 6;
+        int[][] data = {{0, 1}, {0, 2}, {1, 3}, {2, 4}, {3, 5}};
+
+        init(n, data);
+
+        System.out.println("recursive search: ");
+        recursiveSearch();
+        System.out.println();
+
+        System.out.println("iterative search: ");
+        iterativeSearch();
+        System.out.println();
     }
 }
