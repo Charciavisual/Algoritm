@@ -1,4 +1,4 @@
-package template;
+package template.tree;
 
 public class SegmentTree {
     private int[] st;
