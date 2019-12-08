@@ -1,4 +1,4 @@
-package programmers.dp;
+package programmers.bfs;
 
 public class TargetNumber {
     public int solution(int[] numbers, int target) {
