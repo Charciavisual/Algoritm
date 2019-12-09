@@ -1,4 +1,4 @@
-package programmers.dfs;
+package programmers.dfs_bfs;
 
 public class ChangeWord {
     public int solution(String begin, String target, String[] words) {

@@ -1,4 +1,4 @@
-package programmers.bfs;
+package programmers.dfs_bfs;
 
 public class TargetNumber {
     public int solution(int[] numbers, int target) {
