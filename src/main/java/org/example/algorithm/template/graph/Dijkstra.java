@@ -40,12 +40,13 @@ public class Dijkstra {
         }
     }
 
-    public boolean add(int from, int to, int dist) {
+    public void add(int from, int to, int dist) {
         adj[from].add(new Edge(to, dist));
-        return true;
+        //양방향인 경우 아래 주석 제거
+        //adj[to].add(new Edge(from, dist));
     }
 
-    public int[] dijkstra(int startPos) {
+    public int[] calcDistanceFromStart(int startPos) {
 
         PriorityQueue<Edge> pq = new PriorityQueue<>();
 
@@ -73,21 +74,6 @@ public class Dijkstra {
         }
 
         return dist;
-    }
-
-    public void testDijkstra(int n, int[][] edges){
-
-//        int n = 7;
-//        int[][] edges = {{0,1,1},{0,2,2},{0,6,2},{2,3,1},{3,6,1},{1,4,4},{4,5,1},{3,4,1}};
-
-        for(int i=0; i<edges.length; i++) {
-            add(edges[i][0],edges[i][1],edges[i][2]);
-        }
-
-        int[] result = dijkstra(0);
-
-        for(int i=0; i<n; i++)
-            System.out.printf("%d ", result[i]);
     }
 }
 
