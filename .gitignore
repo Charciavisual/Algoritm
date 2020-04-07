@@ -57,6 +57,7 @@ Temporary Items
 ### Gradle template
 .gradle
 /build/
+out
 
 # Ignore Gradle GUI config
 gradle-app.setting
