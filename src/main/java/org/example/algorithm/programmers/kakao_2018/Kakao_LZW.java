@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * 2018 KAKAO BLIND RECRUITMENT - 압축
+ * https://programmers.co.kr/learn/courses/30/lessons/17684
  * @author Changhee Choi
  * @since 19/06/2020
  */
