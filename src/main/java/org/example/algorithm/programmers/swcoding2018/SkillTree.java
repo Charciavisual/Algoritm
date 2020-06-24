@@ -1,6 +1,9 @@
 package org.example.algorithm.programmers.swcoding2018;
 
 /**
+ * Summer/Winter Coding(~2018) - 스킬트리
+ * https://programmers.co.kr/learn/courses/30/lessons/49993/solution_groups?language=java&page=64
+ *
  * @author Changhee Choi
  * @since 24/06/2020
  */
