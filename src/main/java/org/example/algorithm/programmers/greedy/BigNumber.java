@@ -10,6 +10,7 @@ package org.example.algorithm.programmers.greedy;
 public class BigNumber {
     public String solution(String number, int k) {
         String answer = "";
+        int resultLen = number.length() - k;
 
         StringBuilder sb = new StringBuilder();
         sb.append(number.charAt(0)); //첫 숫자 추가
@@ -23,15 +24,7 @@ public class BigNumber {
             sb.append(number.charAt(i));
         }
 
-        //k개 만큼 지우지 못한 경우 (number == 1111000 처럼 같은 숫자가 반복되는 구조일때 발생)
-        //뒤에서부터 남은 k만큼 지워준다. (가장 뒤에 나오는 숫자보다 작은 숫자들은 루프를 돌면서 지워진다)
-        if (k > 0) {
-            for (int i = 0; i < k; i++) {
-                sb.deleteCharAt(sb.length() - 1);
-            }
-        }
-
-        answer = sb.toString();
+        answer = sb.substring(0, resultLen);
 
         return answer;
     }
