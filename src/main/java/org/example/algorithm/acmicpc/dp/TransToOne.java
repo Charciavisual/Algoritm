@@ -29,28 +29,28 @@ public class TransToOne {
     }
 
     private int countOperation() {
-        return calculation(n);
-    }
-
-    private int calculation(int n) {
         if (n == 1) return 0;
 
-        if (cache[n] != 0) {
-            return cache[n];
+        for (int number = n; number > 1; number--) {
+            if (number % 3 == 0) {
+                updateCache(number, number / 3);
+            }
+
+            if (number % 2 == 0) {
+                updateCache(number, number / 2);
+            }
+
+            updateCache(number, number - 1);
         }
 
-        int ret = 987654321;
+        return cache[1];
+    }
 
-        if (n % 3 == 0) {
-            ret = Math.min(ret, calculation(n / 3) + 1);
+    private void updateCache(int current, int next) {
+        if (cache[next] == 0) {
+            cache[next] = cache[current] + 1;
+        } else {
+            cache[next] = Math.min(cache[next], cache[current] + 1);
         }
-        if (n % 2 == 0) {
-            ret = Math.min(ret, calculation(n / 2) + 1);
-        }
-        ret = Math.min(ret, calculation(n - 1) + 1);
-
-        cache[n] = ret;
-
-        return ret;
     }
 }
