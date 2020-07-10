@@ -1,4 +1,4 @@
-package org.example.algorithm.programmers.kakao_2017;
+package org.example.algorithm.programmers.kakao.blind_2017;
 
 import java.util.LinkedList;
 import java.util.Queue;

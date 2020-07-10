@@ -1,4 +1,4 @@
-package org.example.algorithm.programmers.kakao_blind_2020;
+package org.example.algorithm.programmers.kakao.blind_2020;
 
 import java.util.HashSet;
 

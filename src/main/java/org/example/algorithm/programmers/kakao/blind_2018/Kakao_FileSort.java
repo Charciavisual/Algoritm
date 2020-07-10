@@ -1,4 +1,4 @@
-package org.example.algorithm.programmers.kakao_2018;
+package org.example.algorithm.programmers.kakao.blind_2018;
 
 import java.util.Collections;
 import java.util.LinkedList;
