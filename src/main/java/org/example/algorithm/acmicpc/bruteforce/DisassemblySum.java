@@ -23,32 +23,43 @@ public class DisassemblySum {
     }
 
     private int findConstructor() {
-        int num = 1;
-        while (num < n) {
-            int disassemblySum = calcDisassemblySum(num);
-            if (disassemblySum == n) {
+        int digit = calcDigit(n);
+
+        // n이 x자리수의 숫자인 경우
+        // 생성자의 범위는 n - (9 * x) <= m <= n - (0 * x) 이다.
+        // (각 자리에서 최소값 = 0, 최대값 = 9이다.)
+        int minConstructor = n - 9 * digit;
+        int maxConstructor = n;
+
+        for (int num = minConstructor; num <= maxConstructor; num++) {
+            if (calcDisassemblySum(num, digit) == n) {
                 return num;
             }
-            num++;
         }
         return 0;
     }
 
-    private int calcDisassemblySum(int num) {
+    private int calcDigit(int num) {
+        int digit = 0;
+        while (num > 0) {
+            num /= 10;
+            digit++;
+        }
+        return digit;
+    }
+
+    private int calcDisassemblySum(int num, int digit) {
         int disassemblySum = num;
-        int divNum = 1000000;
+        int divNum = 1;
+
+        for (int i = 0; i < digit - 1; i++) {
+            divNum *= 10;
+        }
 
         while (num > 0) {
-            if (divNum == 0) {
-                disassemblySum += num;
-                num = 0;
-                continue;
-            }
             int disassembledNum = num / divNum;
-            if (disassembledNum > 0) {
-                disassemblySum += disassembledNum;
-                num -= disassembledNum * divNum;
-            }
+            disassemblySum += disassembledNum;
+            num -= disassembledNum * divNum;
             divNum /= 10;
         }
 
