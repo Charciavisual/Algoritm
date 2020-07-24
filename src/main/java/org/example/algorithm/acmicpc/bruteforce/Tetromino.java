@@ -1,4 +1,4 @@
-package org.example.algorithm.acmicpc.unpackaged;
+package org.example.algorithm.acmicpc.bruteforce;
 
 import java.io.BufferedReader;
 import java.io.IOException;
