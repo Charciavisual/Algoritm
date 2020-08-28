@@ -1,7 +1,6 @@
 package org.example.algorithm.leetcode;
 
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.Arrays;
 
 /**
  * Longest Substring Without Repeating Characters
@@ -12,24 +11,20 @@ import java.util.Queue;
  */
 public class LongestSubstring {
     public int lengthOfLongestSubstring(String s) {
-        int answer = 0;
-        Queue<Character> substring = new LinkedList<>();
+        int answer = 0, start = 0;
+        int[] index = new int[128]; //ascii
+
+        Arrays.fill(index, -1);
 
         for (int i = 0; i < s.length(); i++) {
-            Character c = s.charAt(i);
-            if (substring.contains(c)) {
-                answer = Math.max(answer, substring.size());
-                //같은 Character를 만날때까지 큐에서 제거
-                while (substring.peek() != c) {
-                    substring.poll();
-                }
-                //같은 Character를 제거
-                substring.poll();
-            }
-            substring.add(c);
+            char c = s.charAt(i);
+            //if c is duplicated, move start to max(previous c index + 1, current start)
+            //if string is "aabaab" and c is 2nd b, previous b index + 1 = 3, current start = 4
+            start = Math.max(index[c] + 1, start);
+            answer = Math.max(answer, i - start + 1);
+            index[c] = i;
         }
 
-        answer = Math.max(answer, substring.size());
         return answer;
     }
 
