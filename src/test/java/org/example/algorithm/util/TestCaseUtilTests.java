@@ -68,4 +68,22 @@ public class TestCaseUtilTests {
         int[] numbers = TestCaseUtil.generateRandomNumbers(10000, 5, 100);
         assertThat(Arrays.stream(numbers).filter(number -> number > 100).count()).isEqualTo(0);
     }
+
+    @Test
+    void max_bound_값도_생성된다() {
+        int[] numbers = TestCaseUtil.generateRandomNumbers(10000, 5, 100);
+        assertThat(Arrays.stream(numbers).filter(number -> number == 100).count()).isGreaterThan(0);
+    }
+
+    @Test
+    void min_bound_값도_생성된다() {
+        int[] numbers = TestCaseUtil.generateRandomNumbers(10000, 5, 100);
+        assertThat(Arrays.stream(numbers).filter(number -> number == 5).count()).isGreaterThan(0);
+    }
+
+    @Test
+    void 중복된_숫자는_포함되지_않는다() {
+        int[] numbers = TestCaseUtil.generateRandomUniqueNumbers(10000, 0, 1000000000);
+        assertThat(numbers).doesNotHaveDuplicates();
+    }
 }

@@ -1,9 +1,6 @@
 package org.example.algorithm.util;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 /**
  * @author Changhee Choi
@@ -69,6 +66,22 @@ public class TestCaseUtil {
         int[] numbers = new int[size];
         for (int i = 0; i < size; i++) {
             numbers[i] = generateRandomNumber(min, max);
+        }
+        return numbers;
+    }
+
+    public static int[] generateRandomUniqueNumbers(int size, int min, int max) {
+        if (size > (max - min + 1)) {
+            throw new IllegalArgumentException(size + "보다 범위가 작습니다.");
+        }
+        Set<Integer> numberSet = new HashSet<>(size);
+        while (numberSet.size() < size) {
+            numberSet.add(generateRandomNumber(min, max));
+        }
+        int[] numbers = new int[size];
+        int idx = 0;
+        for (Integer number : numberSet) {
+            numbers[idx++] = Integer.valueOf(number);
         }
         return numbers;
     }
