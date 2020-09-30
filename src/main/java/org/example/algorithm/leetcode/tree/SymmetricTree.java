@@ -47,24 +47,33 @@ public class SymmetricTree {
         }
     }
 
-    public boolean solution(int[] treeNodes) {
+    public boolean solution(Integer[] treeNodes) {
         TreeNode root = makeTree(treeNodes);
         return isSymmetric(root);
     }
 
-    private TreeNode makeTree(int[] treeNodes) {
+    private TreeNode makeTree(Integer[] treeNodes) {
         Queue<TreeNode> queue = new LinkedList<>();
         TreeNode root = new TreeNode(treeNodes[0]);
         queue.add(root);
 
-        for (int i = 1; i < treeNodes.length - 1; i += 2) {
+        int idx = 1;
+        while (!queue.isEmpty()) {
             TreeNode parent = queue.poll();
-            TreeNode leftNode = new TreeNode(treeNodes[i]);
-            TreeNode rightNode = new TreeNode(treeNodes[i + 1]);
-            parent.left = leftNode;
-            parent.right = rightNode;
-            queue.add(leftNode);
-            queue.add(rightNode);
+            Integer leftNodeNumber = idx < treeNodes.length ? treeNodes[idx++] : null;
+            Integer rightNodeNumber = idx < treeNodes.length ? treeNodes[idx++] : null;
+
+            if (leftNodeNumber != null) {
+                TreeNode leftNode = new TreeNode(leftNodeNumber);
+                parent.left = leftNode;
+                queue.add(leftNode);
+            }
+
+            if (rightNodeNumber != null) {
+                TreeNode rightNode = new TreeNode(rightNodeNumber);
+                parent.right = rightNode;
+                queue.add(rightNode);
+            }
         }
 
         return root;
