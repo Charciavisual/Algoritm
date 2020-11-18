@@ -11,15 +11,8 @@ public class CountingBits {
         int[] answer = new int[num + 1];
         answer[0] = 0;
 
-        for (int n = 1; n <= num; n++) {
-            //2의 제곱수 일때
-            if (n == (n & -n)) {
-                answer[n] = 1;
-            } else if (n % 2 == 1) {
-                answer[n] = answer[n / 2] + 1;
-            } else {
-                answer[n] = answer[n / 2];
-            }
+        for (int i = 1; i <= num; i++) {
+            answer[i] = answer[i >> 1] + (i & 1);
         }
 
         return answer;
