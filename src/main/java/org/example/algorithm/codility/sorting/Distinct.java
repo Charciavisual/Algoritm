@@ -1,4 +1,4 @@
-package org.example.algorithm.codility;
+package org.example.algorithm.codility.sorting;
 
 import java.util.HashSet;
 import java.util.Set;

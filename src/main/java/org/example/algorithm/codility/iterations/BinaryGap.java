@@ -1,4 +1,4 @@
-package org.example.algorithm.codility;
+package org.example.algorithm.codility.iterations;
 
 /**
  * @link https://app.codility.com/programmers/lessons/1-iterations/binary_gap/
