@@ -5,20 +5,19 @@ package org.example.algorithm.leetcode.tree;
  * @since 09/10/2020
  */
 public class TreeNode {
-    int val;
-    TreeNode left;
-    TreeNode right;
+  public int val;
+  public TreeNode left;
+  public TreeNode right;
 
-    TreeNode() {
-    }
+  public TreeNode() {}
 
-    TreeNode(int val) {
-        this.val = val;
-    }
+  public TreeNode(int val) {
+    this.val = val;
+  }
 
-    TreeNode(int val, TreeNode left, TreeNode right) {
-        this.val = val;
-        this.left = left;
-        this.right = right;
-    }
+  public TreeNode(int val, TreeNode left, TreeNode right) {
+    this.val = val;
+    this.left = left;
+    this.right = right;
+  }
 }
