@@ -2,74 +2,33 @@ package org.example.algorithm.leetcode.dp;
 
 import org.example.algorithm.leetcode.tree.TreeNode;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
-import java.util.Queue;
-
 /**
  * @author Changhee Choi
  * @since 07/04/2021
  */
 public class LongestZigzagPathBinaryTree {
   private final int LEFT = 0, RIGHT = 1;
-  private Map<TreeNode, Integer[]> cacheMap = new HashMap<>();
+  private int result = 0;
 
   public int longestZigZag(TreeNode root) {
-    int answer = 0;
-    Queue<TreeNode> treeNodeQueue = new LinkedList<>();
-    treeNodeQueue.add(root);
-
-    while (!treeNodeQueue.isEmpty()) {
-      TreeNode curNode = treeNodeQueue.poll();
-      answer =
-          Math.max(
-              answer,
-              Math.max(findLongestZigZag(curNode, LEFT), findLongestZigZag(curNode, RIGHT)));
-
-      if (hasLeft(curNode)) {
-        treeNodeQueue.add(curNode.left);
-      }
-      if (hasRight(curNode)) {
-        treeNodeQueue.add(curNode.right);
-      }
-    }
-
-    return answer;
+    findLongestZigZag(root.left, LEFT, 1);
+    findLongestZigZag(root.right, RIGHT, 1);
+    return result;
   }
 
-  private int findLongestZigZag(TreeNode node, int dir) {
-    if (dir == LEFT && !hasLeft(node)) {
-      return 0;
-    }
-    if (dir == RIGHT && !hasRight(node)) {
-      return 0;
+  private void findLongestZigZag(TreeNode node, int dir, int len) {
+    if (node == null) {
+      return;
     }
 
-    if (cacheMap.get(node) != null && cacheMap.get(node)[dir] != 0) {
-      return cacheMap.get(node)[dir];
-    }
-
-    int zigzagLen = 0;
-    int nextDir = dir ^ 1;
+    result = Math.max(result, len);
 
     if (dir == LEFT) {
-      zigzagLen = findLongestZigZag(node.left, nextDir) + 1;
+      findLongestZigZag(node.right, RIGHT, len + 1); // 지그재그로 이동하여 길이 늘림
+      findLongestZigZag(node.left, LEFT, 1); // 같은 방향의 자식 노드에서 새로 시작
     } else {
-      zigzagLen = findLongestZigZag(node.right, nextDir) + 1;
+      findLongestZigZag(node.left, LEFT, len + 1); // 지그재그로 이동하여 길이 늘림
+      findLongestZigZag(node.right, RIGHT, 1); // 같은 방향의 자식 노드에서 새로 시작
     }
-
-    Integer[] curNodeCache = cacheMap.getOrDefault(node, new Integer[] {0, 0});
-    curNodeCache[dir] = zigzagLen;
-    cacheMap.put(node, curNodeCache);
-    return zigzagLen;
-  }
-
-  private boolean hasLeft(TreeNode node) {
-    return node.left != null;
-  }
-
-  private boolean hasRight(TreeNode node) {
-    return node.right != null;
   }
 }
