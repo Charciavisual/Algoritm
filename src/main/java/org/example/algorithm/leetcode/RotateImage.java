@@ -5,12 +5,11 @@ package org.example.algorithm.leetcode;
  * @since 15/05/2021
  */
 public class RotateImage {
-
   public void rotate(int[][] matrix) {
     int n = matrix.length;
     int[][] rotated = new int[n][n];
 
-    for (int depth = 0; depth < n / 2; depth++) {
+    for (int depth = 0; depth < n / 2 + n % 2; depth++) {
       rotateOutside(matrix, rotated, depth, n);
     }
 
@@ -24,27 +23,22 @@ public class RotateImage {
 
   private void rotateOutside(int[][] origin, int[][] rotated, int depth, int n) {
 
+    int originMaxIdx = n - 1;
     int minIdx = depth;
-    int maxIdx = (n - 1) - depth;
+    int maxIdx = originMaxIdx - depth;
 
-    // rotate top side
     for (int i = minIdx; i <= maxIdx; i++) {
+      // rotate top side
       rotated[i][maxIdx] = origin[minIdx][i];
+      // rotate right side
+      rotated[maxIdx][originMaxIdx - i] = origin[i][maxIdx];
     }
 
-    // rotate right side
-    for (int i = minIdx; i <= maxIdx; i++) {
-      rotated[maxIdx][n - i] = origin[i][maxIdx];
-    }
-
-    // rotate bottom side
     for (int i = maxIdx; i >= minIdx; i--) {
+      // rotate bottom side
       rotated[i][minIdx] = origin[maxIdx][i];
-    }
-
-    // rotate left side
-    for (int i = maxIdx; i >= minIdx; i--) {
-      rotated[minIdx][n - i] = origin[i][minIdx];
+      // rotate left side
+      rotated[minIdx][originMaxIdx - i] = origin[i][minIdx];
     }
   }
 }
