@@ -7,38 +7,28 @@ package org.example.algorithm.leetcode;
 public class RotateImage {
   public void rotate(int[][] matrix) {
     int n = matrix.length;
-    int[][] rotated = new int[n][n];
-
-    for (int depth = 0; depth < n / 2 + n % 2; depth++) {
-      rotateOutside(matrix, rotated, depth, n);
-    }
-
-    // copy
-    for (int i = 0; i < n; i++) {
-      for (int j = 0; j < n; j++) {
-        matrix[i][j] = rotated[i][j];
-      }
-    }
+    solution1(n, matrix);
   }
 
-  private void rotateOutside(int[][] origin, int[][] rotated, int depth, int n) {
+  private void solution1(int n, int[][] matrix) {
+    final int lastIdx = n - 1;
+    for (int i = 0; i < n / 2; i++) { // 몇번째 outline 인지
 
-    int originMaxIdx = n - 1;
-    int minIdx = depth;
-    int maxIdx = originMaxIdx - depth;
-
-    for (int i = minIdx; i <= maxIdx; i++) {
-      // rotate top side
-      rotated[i][maxIdx] = origin[minIdx][i];
-      // rotate right side
-      rotated[maxIdx][originMaxIdx - i] = origin[i][maxIdx];
-    }
-
-    for (int i = maxIdx; i >= minIdx; i--) {
-      // rotate bottom side
-      rotated[i][minIdx] = origin[maxIdx][i];
-      // rotate left side
-      rotated[minIdx][originMaxIdx - i] = origin[i][minIdx];
+      // 각 outline 당 swap 해야하는 횟수
+      // if, n == 4 일때,
+      // 0번째 outline 이면 3번 swap 필요 (4 - 2*0 - 1)
+      //    1,4,13,16 의 위치를 swap
+      //    2,8,5,9 의 위치를 swap
+      //    3,12,14,5 의 위치를 swap
+      // 1번째 outline 이면 1번 swap 필요 (4 - 2*1 - 1)
+      //    6,7,11,10 의 위치를 swap
+      for (int j = 0; j < n - (2 * i) - 1; j++) {
+        int temp = matrix[i][i + j];
+        matrix[i][i + j] = matrix[lastIdx - i - j][i];
+        matrix[lastIdx - i - j][i] = matrix[lastIdx - i][lastIdx - i - j];
+        matrix[lastIdx - i][lastIdx - i - j] = matrix[i + j][lastIdx - i];
+        matrix[i + j][lastIdx - i] = temp;
+      }
     }
   }
 }
