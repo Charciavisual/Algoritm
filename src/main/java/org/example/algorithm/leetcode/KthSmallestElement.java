@@ -2,17 +2,19 @@ package org.example.algorithm.leetcode;
 
 import org.example.algorithm.leetcode.tree.TreeNode;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author Changhee Choi
  * @since 24/05/2021
  */
 public class KthSmallestElement {
-  private int remain, answer;
+  private List<Integer> arr = new ArrayList<>();
 
   public int kthSmallest(TreeNode root, int k) {
-    remain = k;
     kthSmallest(root);
-    return answer;
+    return arr.get(k - 1);
   }
 
   private void kthSmallest(TreeNode root) {
@@ -20,11 +22,7 @@ public class KthSmallestElement {
       return;
     }
     kthSmallest(root.left);
-    remain--;
-    if (remain == 0) {
-      answer = root.val;
-      return;
-    }
+    arr.add(root.val);
     kthSmallest(root.right);
   }
 }
